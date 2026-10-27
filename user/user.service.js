@@ -19,8 +19,16 @@ const userService = {
     findAll: async () => {
         return await User.findAll();
     },
+    update: async (id) => {
+    const user = await User.findByPk(id);
+    if (!user) throw new Error('User not found!');
+    },
 
-
+    delete: async (id) => {
+    const user = await User.findByPk(id);
+    if (!user) throw new Error('User not found!');
+    return await user.destroy();
+    }
 };
 
 module.exports = userService;

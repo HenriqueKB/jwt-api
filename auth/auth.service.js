@@ -1,14 +1,19 @@
 const jwt = require('jsonwebtoken');
+
 const bcrypt = require('bcrypt');
 const userService = require('../user/user.service');
 const LogoutList = require('./logoutList.model');
 const authService = {
     login: async (email, password) => {
         const user = await userService.findByEmail(email);
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!user || !isMatch) {
+        if (!user) {
             throw new Error('Invalid email or password');
         }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error('Invalid email or password');
+        }
+
         const token = jwt.sign(
             {
              id: user.id,

@@ -8,5 +8,6 @@ router.post('/', userController.create);
 router.get('/:id', authMiddleware, userController.findById);
 router.get('/email/:email', authMiddleware, userController.findByEmail);
 router.get('/', authMiddleware, userController.findAll);
-
+router.delete('/:id', authMiddleware, userController.delete)
+router.put('/:id', authMiddleware, userController.update)
 module.exports = router;

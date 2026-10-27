@@ -38,7 +38,26 @@ const userController = {
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
+    },
+    update: async (req, res) => {
+        const id = req.params.id;
+        const user = req.body;
+        try {
+            const updatedUser = await userService.update(id, user);
+            res.json(updatedUser);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    },    
+    delete: async (req, res) => {
+        try {
+            const user = await userService.delete(req.params.id);
+            res.status(200).json({ message: 'User deleted succesfully!'});
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
     }
+
 };
 
 module.exports = userController;
