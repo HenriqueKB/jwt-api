@@ -8,6 +8,9 @@ const categoryService = {
             throw new Error('Error creating category: ' + error.message);
         }
     },
+    findById: async (id) => {
+        return await Category.findById(id);
+    },    
     findByName: async (name) => {
         return await Category.findByName(name);
     },
