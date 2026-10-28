@@ -12,20 +12,20 @@ const categoryService = {
         return await Category.findById(id);
     },    
     findByName: async (name) => {
-        return await Category.findByName(name);
+        return await Category.findOne({ where: { name } });
     },
     findAll: async () => {
-        return await User.findAll();
+        return await Category.findAll();
     },
-    update: async (name) => {
-    const user = await User.findByPk(id);
-    if (!user) throw new Error('User not found!');
+    update: async (id) => {
+    const Category = await Category.findByPk(id);
+    if (!Category) throw new Error('Category not found!');
     },
 
     delete: async (id) => {
-    const user = await User.findByPk(id);
-    if (!user) throw new Error('User not found!');
-    return await user.destroy();
+    const category = await Category.findByPk(id);
+    if (!category) throw new Error('Category not found!');
+    return await Category.destroy();
     }
 };
 
