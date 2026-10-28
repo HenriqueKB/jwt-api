@@ -2,12 +2,13 @@ const {Router} = require('express');
 const router = Router();
 
 const categoryController = require('./category.controller');
-const authMiddleware = require('../auth/auth.middleware');
+// const  = require('../auth/auth.middleware');
 
-router.post('/', userController.create);
-router.get('/:id', authMiddleware, userController.findById);
-router.get('/email/:email', authMiddleware, userController.findByEmail);
-router.get('/', authMiddleware, userController.findAll);
-router.delete('/:id', authMiddleware, userController.delete)
-router.put('/:id', authMiddleware, userController.update)
+router.post('/', categoryController.create);
+router.get('/:id', categoryController.findById);
+router.get('/email/:email', categoryController.findByName);
+router.get('/', categoryController.findAll);
+router.delete('/:id', categoryController.delete)
+router.put('/:id', categoryController.update)
+
 module.exports = router;
