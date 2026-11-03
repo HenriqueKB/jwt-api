@@ -8,6 +8,7 @@ const cors = require('cors')
 const authRouter = require('./auth/auth.router.js');
 const userRouter = require('./user/user.router.js');
 const categoryRouter = require('./category/category.router.js')
+const authorRouter = require('./author/author.router.js')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ app.use(cors({
 app.use('/v1/category', categoryRouter);
 app.use('/v1/auth', authRouter);
 app.use('/v1/user', userRouter);
-
+app.use('/v1/author', authorRouter);
 db.sync()
 app.listen(PORT, () => {
     console.log(`SERVIDOR RODANDO: http://localhost:${PORT}`);
