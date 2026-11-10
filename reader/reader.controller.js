@@ -1,5 +1,5 @@
-const readerService = require('./reader.service');
-
+const readerService = require('./reader.service.js');
+const loanService = require('../loan/loan.service.js')
 const readerController = {
   create: async (req, res) => {
     try {
@@ -44,6 +44,14 @@ const readerController = {
     try {
       await readerService.delete(req.params.id);
       res.status(200).json({ message: 'Leitor removido com sucesso!' });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+  getLoans: async (req, res) => {
+    try {
+      const loans = await loanService.findAll({ readerId: req.params.id });
+      res.json(loans);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

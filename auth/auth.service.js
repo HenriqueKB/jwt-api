@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const userService = require('../user/user.service');
 const LogoutList = require('./logoutList.model');
 
-// Fallback para garantir que a chave secreta nunca fique undefined em dev
+// Uma redundancia para garantir que a chave secreta nunca fique undefined em dev
 const JWT_SECRET = process.env.JWT_SECRET || 'sua_chave_secreta_padrao_dev_123';
 
 const authService = {

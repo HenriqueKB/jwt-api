@@ -11,11 +11,11 @@ const Reader = require('./reader/reader.model.js');
 const Loan = require('./loan/loan.model');
 
 // Relacionamentos e Associações
-Category.hasMany(Book, { foreignKey: 'categoryId' });
-Book.belongsTo(Category, { foreignKey: 'categoryId' });
+Category.hasMany(Book, { foreignKey: 'categoryId', as: 'books' });
+Book.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' })
 
-Author.belongsToMany(Book, { through: 'BookAuthor', foreignKey: 'authorId' });
-Book.belongsToMany(Author, { through: 'BookAuthor', foreignKey: 'bookId' });
+Author.belongsToMany(Book, { through: 'BookAuthor', foreignKey: 'authorId', as: 'books' });
+Book.belongsToMany(Author, { through: 'BookAuthor', foreignKey: 'bookId', as: 'authors' });
 
 Book.hasMany(Loan, { foreignKey: 'bookId' });
 Loan.belongsTo(Book, { foreignKey: 'bookId' });
