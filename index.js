@@ -6,7 +6,7 @@ const User = require('./user/user.model');
 const Category = require('./category/category.model');
 const Author = require('./author/author.model');
 const Book = require('./book/book.model');
-const Reader = require('./reader/reader.model');
+const Reader = require('./reader/reader.model.js');
 const Loan = require('./loan/loan.model');
 
 // Relacionamentos e Associações
