@@ -1,4 +1,5 @@
 const Category = require('./category.model.js');
+const Book = require('../book/book.model.js'); // Importamos o Book para verificar os vínculos
 
 const categoryService = {
     create: async (categoryData) => {
@@ -31,6 +32,13 @@ const categoryService = {
     delete: async (categoryId) => {
         const category = await Category.findByPk(categoryId);
         if (!category) throw new Error('Category not found!');
+
+        const hasBooks = await Book.findOne({ where: { categoryId } });
+        if (hasBooks) {
+            const error = new Error('Cannot delete category with associated books!');
+            error.statusCode = 409; // 409 Conflict[cite: 1]
+            throw error;
+        }
         
         return await category.destroy();
     }

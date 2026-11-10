@@ -1,8 +1,9 @@
-const sequelize = require('sequelize');
+const { Sequelize } = require('sequelize'); // Uso de PascalCase para a Classe
 
-const db = new sequelize( {
-    dialect: 'sqlite',
-    storage: './database.sqlite'
+const db = new Sequelize({
+  dialect: 'sqlite',
+  storage: './database.sqlite',
+  logging: false // Opcional: desativa o log dos SQLs no terminal se preferir
 });
 
 module.exports = db;

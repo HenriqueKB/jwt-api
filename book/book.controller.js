@@ -10,9 +10,9 @@ const bookController = {
         }
     },
 
-    findByIsbn: async (req, res) => {
+    findById: async (req, res) => {
         try {
-            const book = await bookService.findByIsbn(req.params.isbn);
+            const book = await bookService.findById(req.params.id);
             if (!book) {
                 return res.status(404).json({ error: 'Book not found' });
             }
@@ -36,29 +36,20 @@ const bookController = {
 
     findAll: async (req, res) => {
         try {
-            const books = await bookService.findAll();
+            // Captura req.query para permitir filtros como ?categoryId=2 ou ?search=termo
+            const books = await bookService.findAll(req.query);
             res.json(books);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
     },
 
-    findByNationality: async (req, res) => {
-        try {
-            // Corrigido: passa req.params.nationality para o serviço
-            const books = await bookService.findByNationality(req.params.nationality);
-            res.json(books);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }        
-    },
-
     update: async (req, res) => {
-        const id = req.params.isbn;
+        const id = req.params.id;
         const bookData = req.body;
         try {
-            const updatedbook = await bookService.update(id, bookData);
-            res.json(updatedbook);
+            const updatedBook = await bookService.update(id, bookData);
+            res.json(updatedBook);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
@@ -66,7 +57,7 @@ const bookController = {
 
     delete: async (req, res) => {
         try {
-            await bookService.delete(req.params.isbn);
+            await bookService.delete(req.params.id);
             res.status(200).json({ message: 'Book deleted successfully!' });
         } catch (error) {
             res.status(400).json({ error: error.message });

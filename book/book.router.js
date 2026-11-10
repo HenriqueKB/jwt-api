@@ -1,15 +1,16 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
+const authMiddleware = require('../auth/auth.middleware');
 const bookController = require('./book.controller');
 
-
-router.get('/:id', bookController.findById);
-router.get('/name/:name', bookController.findByTitle);
+// Rotas Públicas (Leitura)
+// O GET '/' vai responder tanto a listagem normal quanto buscas com filtro (?categoryId=X ou ?search=termo)
 router.get('/', bookController.findAll);
-router.get('/year/:year', bookController.findByYear)
+router.get('/:Id', bookController.findById);
 
-router.post('/', bookController.create);
-router.delete('/:id', bookController.delete)
-router.put('/:id', bookController.update)
+// Rotas Protegidas (Escrita e Alteração por atendentes/admins)
+router.post('/', authMiddleware, bookController.create);
+router.put('/:id', authMiddleware, bookController.update);
+router.delete('/:id', authMiddleware, bookController.delete);
 
 module.exports = router;
