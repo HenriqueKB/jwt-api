@@ -11,7 +11,7 @@ const categoryController = {
     },
     findById: async (req, res) => {
         try {
-            const category = await categoryService.findById(req.params.id);
+            const category = await categoryService.findById(req.params.categoryId);
             if (!category) {
                 return res.status(404).json({ error: 'Category not found' });
             }
@@ -41,7 +41,7 @@ const categoryController = {
         }
     },
     update: async (req, res) => {
-        const id = req.params.id;
+        const id = req.params.categoryId;
         const categoryData = req.body;
         try {
             const updatedCategory = await categoryService.update(id, categoryData);
@@ -53,7 +53,7 @@ const categoryController = {
     delete: async (req, res) => {
         try {
             const category = await categoryService.delete(req.params.id);
-            res.status(200).json({ message: 'Category deleted succesfully!'});
+            res.status(200).json({ message: 'Categoria deletada com êxito!'});
         } catch (error) {
             res.status(400).json({ error: error.message });
         }

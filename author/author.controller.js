@@ -12,7 +12,7 @@ const authorController = {
 
     findById: async (req, res) => {
         try {
-            const author = await authorService.findById(req.params.id);
+            const author = await authorService.findById(req.params.authorId);
             if (!author) {
                 return res.status(404).json({ error: 'Author not found' });
             }
@@ -54,7 +54,7 @@ const authorController = {
     },
 
     update: async (req, res) => {
-        const id = req.params.id;
+        const id = req.params.authorId;
         const authorData = req.body;
         try {
             const updatedAuthor = await authorService.update(id, authorData);
@@ -66,7 +66,7 @@ const authorController = {
 
     delete: async (req, res) => {
         try {
-            await authorService.delete(req.params.id);
+            await authorService.delete(req.params.authorId);
             res.status(200).json({ message: 'Author deleted successfully!' });
         } catch (error) {
             res.status(400).json({ error: error.message });

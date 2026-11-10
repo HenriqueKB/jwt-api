@@ -9,8 +9,8 @@ const categoryService = {
         }
     },
 
-    findById: async (id) => {
-        return await Category.findByPk(id);
+    findById: async (categoryId) => {
+        return await Category.findByPk(categoryId);
     },    
 
     findByName: async (name) => {
@@ -21,15 +21,15 @@ const categoryService = {
         return await Category.findAll();
     },
 
-    update: async (id, categoryData) => {
-        const category = await Category.findByPk(id);
+    update: async (categoryId, categoryData) => {
+        const category = await Category.findByPk(categoryId);
         if (!category) throw new Error('Category not found!');
         
         return await category.update(categoryData);
     },
 
-    delete: async (id) => {
-        const category = await Category.findByPk(id);
+    delete: async (categoryId) => {
+        const category = await Category.findByPk(categoryId);
         if (!category) throw new Error('Category not found!');
         
         return await category.destroy();

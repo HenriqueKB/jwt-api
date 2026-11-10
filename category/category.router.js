@@ -4,7 +4,7 @@ const authMiddleware = require('../auth/auth.middleware');
 const categoryController = require('./category.controller');
 
 
-router.get('/:id', categoryController.findById);
+router.get('/:categoryId', categoryController.findById);
 router.get('/name/:name', categoryController.findByName);
 router.get('/', categoryController.findAll);
 
