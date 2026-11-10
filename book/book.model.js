@@ -2,17 +2,16 @@ const db = require('../config/db');
 const { DataTypes } = require('sequelize');
 const Book = db.define('Book', {
     id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    unique: true,
-    autoIncrement: true,
-    allowNull: false
-    },      
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
     isbn: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: true
-    },  
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     title: {
         type: DataTypes.STRING,
         allowNull: false,
